@@ -150,18 +150,20 @@ function App() {
 
   return (
     <div className="py-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div className="flex w-80 mx-auto items-center mb-8 mt-12">
-        <h1 className="text-xl grow font-bold dark:text-white">{GAME_TITLE}</h1>
-        <SunIcon
-          className="h-6 w-6 cursor-pointer dark:stroke-white"
-          onClick={() => handleDarkMode(!isDarkMode)}
-        />
+      <div className="flex w-80 mx-auto items-center mb-8 mt-12 border-b">
         <InformationCircleIcon
-          className="h-6 w-6 cursor-pointer dark:stroke-white"
+          className="h-6 w-6 cursor-pointer dark:stroke-white flex-none"
           onClick={() => setIsInfoModalOpen(true)}
         />
+        <h1 className="text-xl grow font-bold dark:text-white flex-1 text-center">
+          {GAME_TITLE}
+        </h1>
+        <SunIcon
+          className="h-6 w-6 cursor-pointer dark:stroke-white flex-none"
+          onClick={() => handleDarkMode(!isDarkMode)}
+        />
         <ChartBarIcon
-          className="h-6 w-6 cursor-pointer dark:stroke-white"
+          className="h-6 w-6 cursor-pointer dark:stroke-white flex-none"
           onClick={() => setIsStatsModalOpen(true)}
         />
       </div>
@@ -195,7 +197,7 @@ function App() {
 
       <button
         type="button"
-        className="mx-auto mt-8 flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 select-none"
+        className="hidden mx-auto mt-8 flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 select-none"
         onClick={() => setIsAboutModalOpen(true)}
       >
         {ABOUT_GAME_MESSAGE}
