@@ -77,6 +77,7 @@ export const Keyboard = ({ onChar, onDelete, onEnter, guesses }: Props) => {
         <Key value="Ű" onClick={onClick} status={charStatuses['Ű']} />
         <Key value="É" onClick={onClick} status={charStatuses['É']} />
         <Key value="Á" onClick={onClick} status={charStatuses['Á']} />
+        <Key value="Í" onClick={onClick} status={charStatuses['Í']} />
       </div>
       <div className="flex justify-center">
         <Key width={65.4} value="ENTER" onClick={onClick}>
