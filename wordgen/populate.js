@@ -6,7 +6,7 @@ const events = require('events');
 const XRegExp = require('xregexp');
 const unicodeWord = XRegExp("^\\pL+$");
 
-const N = 100000;
+const N = -1;
 let i = 0;
 
 const wordFrequency = {};
@@ -20,10 +20,12 @@ const wordFrequency = {};
 
         rl.on('line', (line) => {
             i++;
-            // console.log(`Line from file: ${line}`);
-            const localFrequency = line.split(" ").reduce((acc, word) => {
+            line.split(" ").reduce((acc, word) => {
                 // console.log(acc, word);
-                if (word.length == 5 && unicodeWord.test(word)) {
+                if (word.length == 5 &&
+                    unicodeWord.test(word) &&
+                    word == word.toLowerCase() &&
+                    word != word.toUpperCase()) {
                     if (word in acc) {
                         acc[word]++
                     }
@@ -34,28 +36,27 @@ const wordFrequency = {};
                 return acc;
             }, wordFrequency);
 
-            // if (N == i) {
-            //     rl.close();
-            // }
+            if (N == i) {
+                rl.close();
+            }
         });
 
         await events.once(rl, 'close');
 
+        console.log('Closed file after line: ' + i);
+
         const sorted = Object.fromEntries(
-            Object.entries(wordFrequency).sort(([, a], [, b]) => b - a).slice(0, 12000)
+            Object.entries(wordFrequency).sort(([, a], [, b]) => b - a).slice(0, 8000)
         );
 
-        // const sorted = Object.entries(wordFrequency).sort(([, a], [, b]) => b - a);
+        const keys = Object.keys(sorted);
+
+        console.log("Sorted list contains: " + keys.length
+            + " entries. Last frequency is: " + sorted[keys[keys.length - 1]]);
 
 
-
-        console.log(sorted);
-
-        let data = JSON.stringify(Object.keys(sorted), null, 2);
+        let data = JSON.stringify(keys, null, 2);
         fs.writeFileSync('./wordgen/words-' + new Date() + '.json', data);
-
-        // console.log(sorted.slice(sorted.length / 40));
-
 
         console.log('Reading file line by line with readline done.');
         const used = process.memoryUsage().heapUsed / 1024 / 1024;

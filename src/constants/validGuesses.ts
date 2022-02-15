@@ -1,3 +1,4 @@
-import allWords from './words.json';
+import wiki from './wiki-words.json';
+import aspell from './aspell-words.json';
 
-export const VALIDGUESSES = allWords;
+export const VALIDGUESSES = wiki.concat(aspell);
