@@ -1,4 +1,4 @@
-import wiki from './wiki-words.json';
-import aspell from './aspell-words.json';
+import sols from './solutions.json';
+import guesses from './guesses.json';
 
-export const VALIDGUESSES = wiki.concat(aspell);
+export const VALIDGUESSES = sols.concat(guesses);

@@ -21,7 +21,6 @@ const wordFrequency = {};
         rl.on('line', (line) => {
             i++;
             line.split(" ").reduce((acc, word) => {
-                // console.log(acc, word);
                 if (word.length == 5 &&
                     unicodeWord.test(word) &&
                     word == word.toLowerCase() &&
@@ -43,11 +42,13 @@ const wordFrequency = {};
 
         await events.once(rl, 'close');
 
-        console.log('Closed file after line: ' + i);
+        // console.log('Closed file after line: ' + i);
 
         const sorted = Object.fromEntries(
-            Object.entries(wordFrequency).sort(([, a], [, b]) => b - a).slice(0, 8000)
+            Object.entries(wordFrequency).sort(([, a], [, b]) => b - a).slice(0, 80000)
         );
+
+        console.log(sorted)
 
         const keys = Object.keys(sorted);
 
